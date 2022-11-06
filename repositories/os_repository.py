@@ -1,20 +1,34 @@
 import base64
 import ast
 import os
+from datetime import datetime
+
+from getpass import getpass
+
+
+def get_values():
+    url = input('Entre com a URL (sem aspas): ')
+    token = getpass('Entre com o token do usuário (sem aspas): ')
+    secrets_dict = {
+        'url': url,
+        'token': token
+    }
+    for i in range(1, 6):
+        secrets_dict[f'key{i}'] = getpass(f'Entre com a chave {i} (sem aspas): ')
+    return secrets_dict
 
 
 def encode():
-    teste_list = {
-        'url': os.getenv('URL'),
-        'token': os.getenv('TOKEN'),
-        'key1': os.getenv('KEY1'),
-        'key2': os.getenv('KEY2'),
-        'key3': os.getenv('KEY3'),
-        'key4': os.getenv('KEY4'),
-        'key5': os.getenv('KEY5')
-    }
+    secrets_dict = get_values()
+    content = str(secrets_dict)
+    config_file_exists = os.path.exists(f'{os.getcwd()}/sct.hcv')
 
-    content = str(teste_list)
+    if config_file_exists:
+        print('*** ATENÇÃO!!! *** Já existe um arquivo de configuração.')
+        today = datetime.today()
+        today_str = today.strftime('%Y-%m-%d_%H-%M-%S')
+        os.rename('sct.hcv', f'sct-backup-{today_str}.hcv')
+        print(f'Arquivo renomeado para sct-backup-{today_str}.hvc')
 
     with open('sct.hcv', 'w', encoding='utf-8') as file:
         content_bytes = content.encode('ascii')

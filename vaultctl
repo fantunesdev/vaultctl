@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /var/lib/vaultctl/
+#cd /var/lib/vaultctl/
 source venv/bin/activate
 python main.py $1

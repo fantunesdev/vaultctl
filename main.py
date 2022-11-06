@@ -2,7 +2,8 @@ import os
 import sys
 
 import system_messages
-from repositories import vault_repository
+from repositories import vault_repository, os_repository
+
 try:
     param = sys.argv[1]
 
@@ -23,6 +24,8 @@ try:
         vault_repository.get_status()
     elif param == 'help' or param == '-h':
         system_messages.print_options()
+    elif param == '--first-config':
+        os_repository.encode()
     else:
         raise IndexError
 except IndexError:

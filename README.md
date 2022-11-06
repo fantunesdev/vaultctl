@@ -12,18 +12,16 @@ Não desenvolvemos funções para adicionar ou consultar chaves dentro do vault,
 ## Como usar
 
 > vaultctl [option]  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unseal, -u &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Desbloqueia o vault.  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; seal, -s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bloqueia o vault.  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -u, unseal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Desbloqueia o vault.  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -s, seal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bloqueia o vault.  
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe o status do vault.  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; token, -t &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe o token do usuário.  
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; keys, -k &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe as chaves.   
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; help, -h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ajuda.
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -t, token &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe o token do usuário.  
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -k, keys &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe as chaves.   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -h, help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ajuda.
 
 ## Instalação*
 
-> git clone git@github.com:fantunesdev/vaultcfg.git  
-> cd vaultctl  
-> chmod +x install.sh   
-> sudo ./install.sh
+> git clone git@github.com:fantunesdev/vaultctl.git  
+> sudo ./vaultctl/install.sh
 
 *Script em desenvolvimento

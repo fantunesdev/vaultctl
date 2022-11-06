@@ -20,7 +20,7 @@ def print_success_message(message):
 
 
 def print_error_message(message):
-    print(f'\033[1:32m{message}\033[m')
+    print(f'\033[1:31m{message}\033[m')
 
 
 def print_options():
@@ -31,4 +31,5 @@ def print_options():
   -t, token         Get user token.
   -k, keys          Get keys.
   -h, help          Get help.
+  --first-config    Set vault values.
             ''')
