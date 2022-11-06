@@ -21,3 +21,14 @@ def print_success_message(message):
 
 def print_error_message(message):
     print(f'\033[1:32m{message}\033[m')
+
+
+def print_options():
+    print('''
+usage: vaultctl [option]
+  unseal, -u        Unseal your vault.
+  seal, -s          Seal your vault.
+  token, -t         Get user token.
+  keys, -k          Get keys.
+  status            Get vault status.
+            ''')

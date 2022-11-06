@@ -2,4 +2,4 @@
 
 cd /home/fernando/git/dev/python/vannilla/vault/
 source venv/bin/activate
-python main.py
+python main.py $1
