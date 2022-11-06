@@ -21,7 +21,7 @@ try:
             print(os.getenv(f'KEY{i}'))
     elif param == 'status':
         vault_repository.get_status()
-    elif param == '--help' or param == '-h':
+    elif param == 'help' or param == '-h':
         system_messages.print_options()
     else:
         raise IndexError
