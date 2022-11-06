@@ -45,8 +45,7 @@ def get_status():
         client = hvac.Client(url=os.getenv('URL'))
         response = client.seal_status
 
-        print(f'''
-Seal Type       {response['type']}
+        print(f'''Seal Type       {response['type']}
 Initialized     {response['initialized']}
 Sealed          {response['sealed']}
 Total Shares    {response['n']}

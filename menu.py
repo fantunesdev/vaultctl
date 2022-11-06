@@ -1,5 +1,4 @@
 import system_messages
-import system_messages
 from repositories import vault_repository, os_repository
 
 while True:

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /home/fernando/git/dev/python/vannilla/vault/
+cd /var/lib/vaultctl/
 source venv/bin/activate
 python main.py $1
