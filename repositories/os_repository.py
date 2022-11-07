@@ -27,8 +27,8 @@ def encode():
         print('*** ATENÇÃO!!! *** Já existe um arquivo de configuração.')
         today = datetime.today()
         today_str = today.strftime('%Y-%m-%d_%H-%M-%S')
-        os.rename('.sct.hcv', f'sct-backup-{today_str}.hcv')
-        print(f'Arquivo renomeado para sct-backup-{today_str}.hvc')
+        os.rename('.sct.hcv', f'.sct-backup-{today_str}.hcv')
+        print(f'Arquivo renomeado para .sct-backup-{today_str}.hvc')
 
     with open('.sct.hcv', 'w', encoding='utf-8') as file:
         content_bytes = content.encode('ascii')
