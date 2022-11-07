@@ -1,11 +1,8 @@
 import os
 
 import hvac
-import dotenv
 
 from repositories import os_repository
-
-dotenv.load_dotenv()
 
 
 def unseal_vault():

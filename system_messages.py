@@ -31,5 +31,5 @@ def print_options():
   -t, token         Get user token.
   -k, keys          Get keys.
   -h, help          Get help.
-  --first-config    Set vault values.
+  --configure       Set vault values.
             ''')

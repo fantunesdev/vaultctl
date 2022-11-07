@@ -21,16 +21,16 @@ def get_values():
 def encode():
     secrets_dict = get_values()
     content = str(secrets_dict)
-    config_file_exists = os.path.exists(f'{os.getcwd()}/sct.hcv')
+    config_file_exists = os.path.exists(f'{os.getcwd()}/.sct.hcv')
 
     if config_file_exists:
         print('*** ATENÇÃO!!! *** Já existe um arquivo de configuração.')
         today = datetime.today()
         today_str = today.strftime('%Y-%m-%d_%H-%M-%S')
-        os.rename('sct.hcv', f'sct-backup-{today_str}.hcv')
+        os.rename('.sct.hcv', f'sct-backup-{today_str}.hcv')
         print(f'Arquivo renomeado para sct-backup-{today_str}.hvc')
 
-    with open('sct.hcv', 'w', encoding='utf-8') as file:
+    with open('.sct.hcv', 'w', encoding='utf-8') as file:
         content_bytes = content.encode('ascii')
         base64_content = base64.b64encode(content_bytes)
         content_str = str(base64_content)
@@ -39,7 +39,7 @@ def encode():
 
 
 def decode():
-    with open('sct.hcv', 'r', encoding='utf-8') as file:
+    with open('.sct.hcv', 'r', encoding='utf-8') as file:
         content = file.read()
         code = content.split("\'")[1]
         string = str(base64.b64decode(code)).split('\"')[1]

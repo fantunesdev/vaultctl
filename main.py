@@ -24,7 +24,7 @@ try:
         vault_repository.get_status()
     elif param == 'help' or param == '-h':
         system_messages.print_options()
-    elif param == '--first-config':
+    elif param == '--configure':
         os_repository.encode()
     else:
         raise IndexError
