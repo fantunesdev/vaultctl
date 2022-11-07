@@ -17,9 +17,12 @@ try:
         token = vault_repository.get_user_token()
         print(token)
     elif param == 'keys' or param == '-k':
-        keys = vault_repository.get_keys()
-        for i in range(1, 6):
-            print(os.getenv(f'KEY{i}'))
+        try:
+            keys = vault_repository.get_keys()
+            for i in range(1, 6):
+                print(os.getenv(f'KEY{i}'))
+        except UserWarning:
+            print('Root privilegies are needed.')
     elif param == 'status':
         vault_repository.get_status()
     elif param == 'help' or param == '-h':

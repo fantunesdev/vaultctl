@@ -25,16 +25,20 @@ def seal_vault():
 
 
 def get_user_token():
-    os_repository.decode()
-    return os.getenv('TOKEN')
+    if os.getenv('USER') == 'root':
+        os_repository.decode()
+        return os.getenv('TOKEN')
+    return 'Root privilegies are needed.'
 
 
 def get_keys():
-    keys_list = []
-    os_repository.decode()
-    for i in range(1, 6):
-        keys_list.append(os.getenv(f'KEY{i}'))
-    return keys_list
+    if os.getenv('USER') == 'root':
+        keys_list = []
+        os_repository.decode()
+        for i in range(1, 6):
+            keys_list.append(os.getenv(f'KEY{i}'))
+        return keys_list
+    raise UserWarning
 
 
 def get_status():
@@ -55,6 +59,6 @@ Cluster ID      {response['cluster_id']}
 HA Enabeld      {client.ha_status['ha_enabled']}
         ''')
     except hvac.exceptions.VaultDown:
-        print('Vault is seal. Please unseal vault.')
+        print('Vault is sealed. Please unseal vault.')
     except KeyError:
-        print('Vault is seal. Please unseal vault.')
+        print('Vault is sealed. Please unseal vault.')
