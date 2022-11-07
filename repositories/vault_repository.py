@@ -20,6 +20,7 @@ def unseal_vault():
 
 
 def seal_vault():
+    os_repository.decode()
     client = hvac.Client(url=os.getenv('URL'))
     client.sys.seal()
 
@@ -43,6 +44,7 @@ def get_keys():
 
 def get_status():
     try:
+        os_repository.decode()
         client = hvac.Client(url=os.getenv('URL'))
         response = client.seal_status
 
