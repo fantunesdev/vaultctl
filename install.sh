@@ -21,7 +21,16 @@ if [ $ACTUAL_DIR == 'vaultctl' ]; then
         pip install --upgrade pip
         pip install -r requirements.txt
 
-        vaultctl --configure
+        if [ -f /var/lib/vaultctl/.sct.hcv ]; then
+            echo "Já existe um arquivo com as chaves configurado. Será possível fazer essa configuração mais tarde com o comando vaultctl --configure"
+            echo "Deseja sobrescrevê-lo? (s/N)"
+            read USER_RESPONSE
+            if [ $USER_RESPONSE == 's' -o $USER_RESPONSE == 'S' ]; then
+                vaultctl --configure
+            fi
+        else
+            vaultctl --configure
+        fi
     else
         echo 'É necessário estar logado como root para realizar a instalação.'
     fi
