@@ -19,10 +19,11 @@ Não desenvolvemos funções para adicionar ou consultar chaves dentro do vault,
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -k, keys &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exibe as chaves.   
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -h, help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ajuda.
 
-## Instalação*
+## Dependências
+> Python 3.10.
+
+## Instalação
 
 > git clone git@github.com:fantunesdev/vaultctl.git  
 > cd vaultctl  
 > sudo ./install.sh
-
-*Script em desenvolvimento
