@@ -1,12 +1,11 @@
 #!/bin/bash
 
-PATH=$(pwd)
+ACTUAL_PATH=$(pwd)
 IFS='/'
-read -a strarr <<< "$PATH"
-SUBDIR_NUMBER=$((${#strarr[*]} - 1))
-ACTUAL_DIR=${strarr[$SUBDIR_NUMBER]}
+read -a STR_LIST <<< "$ACTUAL_PATH"
+SUBDIR_NUMBER=$((${#STR_LIST[*]} - 1))
+ACTUAL_DIR=${STR_LIST[$SUBDIR_NUMBER]}
 if [ $ACTUAL_DIR == 'vaultctl' ]; then
-    echo "entrou"
     if [ $USER = 'root' ]; then
         cp vaultctl /usr/local/bin/
 
@@ -27,5 +26,5 @@ if [ $ACTUAL_DIR == 'vaultctl' ]; then
         echo 'É necessário estar logado como root para realizar a instalação.'
     fi
 else
-    echo "Você está no diretório vaultctl. Por favor, acesse esse diretório para continuar a instalação."
+    echo "Você está no diretório vaultctl. Por favor, acesse esse diretório e tente novamente."
 fi

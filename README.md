@@ -24,6 +24,7 @@ Não desenvolvemos funções para adicionar ou consultar chaves dentro do vault,
 
 ## Instalação
 
+> cd /tmp  
 > git clone git@github.com:fantunesdev/vaultctl.git  
 > cd vaultctl  
 > sudo ./install.sh
