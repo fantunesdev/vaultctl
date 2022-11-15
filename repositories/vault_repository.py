@@ -60,6 +60,6 @@ Cluster Name    {response['cluster_name']}
 Cluster ID      {response['cluster_id']}
 HA Enabeld      {client.ha_status['ha_enabled']}''')
     except hvac.exceptions.VaultDown:
-        print('Vault is sealed. Please unseal vault.')
+        os.system('vault status')
     except KeyError:
-        print('Vault is sealed. Please unseal vault.')
+        os.system('vault status')
