@@ -1,15 +1,28 @@
 import ast
 import os
+import socket
 import sys
 from datetime import datetime
 from getpass import getpass
 
+import nacl.exceptions
 import nacl.secret
 import nacl.utils
 
 
 def get_values():
+    # create_key()
     url = input('Entre com a URL (sem aspas): ')
+    url_is_valid = veryfy_url(url)
+    if not url_is_valid:
+        print(
+            f'A url "{url}" não é válida. '
+            f'Digite um ip/dns e uma porta separados por ":".\n'
+            f'Exemplo: 127.0.0.1:8200 ou localhost:8200.\n'
+            f'OBS: 8200 é porta padrão do Vault. '
+            f'Verifique as configurações do Vault.'
+        )
+        sys.exit(1)
     token = getpass('Entre com o token do usuário (sem aspas): ')
     secrets_dict = {'url': url, 'token': token}
     for i in range(1, 6):
@@ -19,33 +32,109 @@ def get_values():
     return secrets_dict
 
 
-def create_box():
-    with open('../key_directory', 'r', encoding='utf-8') as kd_file:
-        key_directory = kd_file.read()
+def create_key():
+    user_response = input('Você deseja criar uma chave criptográfica? (S/n): ')
+    if user_response in ['n', 'N']:
+        key_path = input('Entre com o endereço completo da chave: ')
+        verify_existing_key(key_path)
+    else:
+        print('Criando chave criptográfica.')
+        key = nacl.utils.random(nacl.secret.SecretBox.KEY_SIZE)
+        key_directory = input(
+            'Entre com o endereço onde deseja salvar a chave: '
+        )
+        if key_directory[-1] != '/':
+            key_directory += '/'
+        key_path = f'{key_directory}pvt.key'
+        with open('../key_directory', 'w', encoding='utf-8') as kd_file:
+            kd_file.write(key_path)
+            kd_file.close()
+        new_key = verify_new_key(key_directory, key)
+        if not new_key:
+            sys.exit(1)
+
+
+def verify_existing_key(key_path: str):
+    with open('../key_directory', 'w+', encoding='utf-8') as kd_file:
+        kd_file.write(key_path)
         kd_file.close()
+    box = create_box()
+    if box:
+        print(f'Foi encontrada uma chave válida em {key_path}.')
+    else:
+        sys.exit(1)
+
+
+def verify_new_key(key_directory: str, key: bytes):
     try:
-        with open(key_directory, 'rb') as key_file:
-            key = key_file.read()
+        if not os.path.isdir(key_directory):
+            raise NotADirectoryError
+        with open(f'{key_directory}sct.key', 'wb') as key_file:
+            key_file.write(key)
             key_file.close()
-        return nacl.secret.SecretBox(key)
-    except FileNotFoundError:
-        print(
-            'O arquivo de configuração key_directory não '
-            'contém o endereço da chave de desencriptação.'
-        )
-        sys.exit()
-    except IsADirectoryError:
-        print(
-            'O arquivo de configuração key_directory contém '
-            'o endereço de um diretório. Forneça o endereço '
-            'completo da chave.'
-        )
-        sys.exit()
+        return True
+    except NotADirectoryError:
+        print(f'O diretório {key_directory} não existe.')
+        return None
     except PermissionError:
         print(
             'Erro de permissão. Verifique as permissões do arquivo e tente novamente.'
         )
-        sys.exit()
+        return None
+
+
+def veryfy_url(url: str):
+    try:
+        ip, port = url.split(':')
+        port = int(port)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex((ip, port))
+        if not port == 8200:
+            print(
+                f'ATENÇÃO! Você selecionou a porta {port}. '
+                f'A porta padrão do Vault é 8200. '
+                f'Ignore este aviso se a porta configurada '
+                f'for realmente diferente. '
+                f'Caso contrário, cancele (Ctrl + C) e tente novamente.'
+            )
+        if result == 0:
+            return True
+        return False
+    except ValueError:
+        return False
+    except socket.gaierror:
+        return False
+
+
+def create_box():
+    with open('../key_directory', 'r', encoding='utf-8') as kd_file:
+        key_path = kd_file.read()
+        kd_file.close()
+    try:
+        with open(key_path, 'rb') as key_file:
+            key = key_file.read()
+            key_file.close()
+        return nacl.secret.SecretBox(key)
+    except FileNotFoundError:
+        print(f'Arquivo não encontrado. Você digitou: {key_path}')
+        return None
+    except IsADirectoryError:
+        if not key_path[-1] == '/':
+            key_path += '/'
+        print(
+            f'"{key_path}" é um diretório. '
+            f'Digite o caminho completo da chave e tente novamente.\n'
+            f'Exemplo: {key_path}sct.key'
+        )
+        return None
+    except PermissionError:
+        print(
+            'Erro de permissão. Verifique as permissões do arquivo e tente novamente.'
+        )
+        return None
+    except nacl.exceptions.ValueError:
+        print(f'O arquivo {key_path} não contém uma chave válida.')
+        return None
 
 
 def encode():
