@@ -1,9 +1,9 @@
 def print_success_message(message):
-    print(f"\033[1:32m{message}\033[m")
+    print(f'\033[1:32m{message}\033[m')
 
 
 def print_error_message(message):
-    print(f"\033[1:31m{message}\033[m")
+    print(f'\033[1:31m{message}\033[m')
 
 
 def print_options():
