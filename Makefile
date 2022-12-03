@@ -1,5 +1,5 @@
 format:
 	@poetry run isort .
-	@poetry run black .
+	@poetry run blue .
 lint:
 	@poetry run prospector --with-tool pydocstyle --doc-warning
