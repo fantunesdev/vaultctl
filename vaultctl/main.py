@@ -16,7 +16,7 @@ try:
     elif param in ["token", "-t"]:
         token = vault_repository.get_user_token()
         print(token)
-    elif param == ["keys", "-k"]:
+    elif param in ["keys", "-k"]:
         try:
             keys = vault_repository.get_keys()
             for i in range(1, 6):
