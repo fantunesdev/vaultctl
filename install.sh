@@ -7,12 +7,13 @@ SUBDIR_NUMBER=$((${#STR_LIST[*]} - 1))
 ACTUAL_DIR=${STR_LIST[$SUBDIR_NUMBER]}
 if [ $ACTUAL_DIR == 'vaultctl' ]; then
     if [ $USER = 'root' ]; then
-        cp vaultctl /usr/local/bin/
+        cp vaultctl /usr/bin/
 
         if [ ! -d /var/lib/vaultctl ]; then
             mkdir /var/lib/vaultctl
         fi
-        cp -rf * /var/lib/vaultctl/
+        cd ..
+        cp -rf vaultctl /var/lib/vaultctl/
 
         cd /var/lib/vaultctl/
 
@@ -35,5 +36,5 @@ if [ $ACTUAL_DIR == 'vaultctl' ]; then
         echo 'É necessário estar logado como root para realizar a instalação.'
     fi
 else
-    echo "Você está no diretório vaultctl. Por favor, acesse esse diretório e tente novamente."
+    echo "Você não está no diretório vaultctl. Por favor, acesse esse diretório e tente novamente."
 fi
