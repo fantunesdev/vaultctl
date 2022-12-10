@@ -7,7 +7,7 @@ SUBDIR_NUMBER=$((${#STR_LIST[*]} - 1))
 ACTUAL_DIR=${STR_LIST[$SUBDIR_NUMBER]}
 if [ $ACTUAL_DIR == 'vaultctl' ]; then
     if [ $USER = 'root' ]; then
-        cp vaultctl /usr/bin/
+        cp vaultctl.sh /usr/bin/vaultctl
 
         if [ ! -d /var/lib/vaultctl ]; then
             mkdir /var/lib/vaultctl
