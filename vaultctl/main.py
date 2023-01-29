@@ -28,7 +28,7 @@ try:
     elif param in ['help', '-h']:
         system_messages.print_options()
     elif param == '--configure':
-        os_repository.encode()
+        os_repository.configure_vaultctl()
     else:
         raise IndexError
 except IndexError:

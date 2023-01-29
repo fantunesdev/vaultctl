@@ -11,14 +11,13 @@ import nacl.utils
 
 
 def get_values():
-    # create_key()
     url = input('Entre com a URL (sem aspas): ')
     url_is_valid = veryfy_url(url)
     if not url_is_valid:
         print(
             f'A url "{url}" não é válida. '
             f'Digite um ip/dns e uma porta separados por ":".\n'
-            f'Exemplo: 127.0.0.1:8200 ou localhost:8200.\n'
+            f'Exemplo: http://127.0.0.1:8200 ou http://localhost:8200.\n'
             f'OBS: 8200 é porta padrão do Vault. '
             f'Verifique as configurações do Vault.'
         )
@@ -46,7 +45,7 @@ def create_key():
         if key_directory[-1] != '/':
             key_directory += '/'
         key_path = f'{key_directory}pvt.key'
-        with open('../key_directory', 'w', encoding='utf-8') as kd_file:
+        with open('../key_directory.conf', 'w', encoding='utf-8') as kd_file:
             kd_file.write(key_path)
             kd_file.close()
         new_key = verify_new_key(key_directory, key)
@@ -55,7 +54,7 @@ def create_key():
 
 
 def verify_existing_key(key_path: str):
-    with open('../key_directory', 'w+', encoding='utf-8') as kd_file:
+    with open('../key_directory.conf', 'w+', encoding='utf-8') as kd_file:
         kd_file.write(key_path)
         kd_file.close()
     box = create_box()
@@ -69,7 +68,7 @@ def verify_new_key(key_directory: str, key: bytes):
     try:
         if not os.path.isdir(key_directory):
             raise NotADirectoryError
-        with open(f'{key_directory}sct.key', 'wb') as key_file:
+        with open(f'{key_directory}pvt.key', 'wb') as key_file:
             key_file.write(key)
             key_file.close()
         return True
@@ -85,7 +84,8 @@ def verify_new_key(key_directory: str, key: bytes):
 
 def veryfy_url(url: str):
     try:
-        ip, port = url.split(':')
+        protocol, nothing, path = url.split('/')
+        ip, port = path.split(':')
         port = int(port)
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         result = sock.connect_ex((ip, port))
@@ -107,7 +107,7 @@ def veryfy_url(url: str):
 
 
 def create_box():
-    with open('../key_directory', 'r', encoding='utf-8') as kd_file:
+    with open('../key_directory.conf', 'r', encoding='utf-8') as kd_file:
         key_path = kd_file.read()
         kd_file.close()
     try:
@@ -124,7 +124,7 @@ def create_box():
         print(
             f'"{key_path}" é um diretório. '
             f'Digite o caminho completo da chave e tente novamente.\n'
-            f'Exemplo: {key_path}sct.key'
+            f'Exemplo: {key_path}pvt.key'
         )
         return None
     except PermissionError:
@@ -137,7 +137,8 @@ def create_box():
         return None
 
 
-def encode():
+def configure_vaultctl():
+    create_key()
     secrets_dict = get_values()
 
     config_file_exists = os.path.exists(f'{os.getcwd()}/sct.hcv')
