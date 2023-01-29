@@ -20,7 +20,7 @@ Não desenvolvemos funções para adicionar ou consultar chaves dentro do vault,
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -h, help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ajuda.
 
 ## Dependências
-> Python 3.10.
+> Python 3.6 ou superior.
 
 ## Instalação
 
