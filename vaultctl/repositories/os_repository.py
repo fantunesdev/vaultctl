@@ -158,7 +158,7 @@ def configure_vaultctl():
         file.close()
 
 
-def decode():
+def decrypt_secrets():
     box = create_box()
     with open('sct.hcv', 'rb') as file:
         encrypted_data = file.read()
