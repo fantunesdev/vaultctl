@@ -20,7 +20,7 @@ def unseal_vault():
 
 def seal_vault():
     os_repository.decrypt_secrets()
-    client = hvac.Client(url=os.getenv('URL'))
+    client = hvac.Client(url=os.getenv('URL'), token=os.getenv('TOKEN'))
     client.sys.seal()
 
 
@@ -61,6 +61,6 @@ Cluster ID      {response['cluster_id']}
 HA Enabeld      {client.ha_status['ha_enabled']}"""
         )
     except hvac.exceptions.VaultDown:
-        os.system('vault status')
+        print('Vault is seal, please unseal to see more information.')
     except KeyError:
-        os.system('vault status')
+        print('Vault is seal, please unseal to see more information.')
