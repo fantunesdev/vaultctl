@@ -13,8 +13,8 @@ def print_options():
   -s, seal          Seal your vault.
   status            Get vault status.
   -t, token         Get user token.
+  -U, url           Get vault server URL.
   -k, keys          Get keys.
   -h, help          Get help.
-  --configure       Set vault values.
-            """
+  --configure       Set vault values."""
     )

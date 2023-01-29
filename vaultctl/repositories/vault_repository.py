@@ -25,10 +25,13 @@ def seal_vault():
 
 
 def get_user_token():
-    if os.getenv('USER') == 'root':
-        os_repository.decrypt_secrets()
-        return os.getenv('TOKEN')
-    return 'Root privilegies are needed.'
+    os_repository.decrypt_secrets()
+    return os.getenv('TOKEN')
+
+
+def get_url():
+    os_repository.decrypt_secrets()
+    return os.getenv('URL')
 
 
 def get_keys():
